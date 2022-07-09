@@ -1,8 +1,7 @@
 // Assignment code here
 function generatePassword(){
     var length = window.prompt("choose password length between 8 and 128")
-    char = "abcdefghijklmnopqrstuvwkyz"
-    num = "1234567890"
+    char = "abcdefghijklmnopqrstuvwkyz123456789!@#$%^&*()-_=+ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     passwordText = [""]
      for(i=0;i < length; i++){
         passwordText += char.charAt(Math.floor(Math.random() * char.length)) 
