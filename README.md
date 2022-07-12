@@ -9,4 +9,4 @@ Once you enter a number my funtion will run and return a completely random passw
 
 (![Passwordgenerator](https://user-images.githubusercontent.com/102045473/178502292-83363e7c-46a1-4f4e-88f5-57b45589bcd8.png)
 
-[click]
+click the lightning bulb [⚡](https://cykj40.github.io/password-generator/) to try out my password generator!
