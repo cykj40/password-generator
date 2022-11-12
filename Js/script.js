@@ -6,9 +6,9 @@ function generatePassword(){
   var special =[ "!","@","#","$","%","^","&","*","(",")","_","-","+","=","{","}","[","]","|",";",":","<",">","?","/"];
   var selectedArray = [];
 
-  var passwordLength = prompt("How many characters would you like your password to be? (8-128)");
-  if (passwordLength < 8 || passwordLength > 128){
-    alert("Please enter a number between 8 and 128");
+  var passwordLength = prompt("How many characters would you like your password to be? (8-30)");
+  if (passwordLength < 8 || passwordLength > 30){
+    alert("Please enter a number between 8 and 30");
     return;
   }
   
