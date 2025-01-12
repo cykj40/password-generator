@@ -1,52 +1,72 @@
+'use client';
+
 import { ClerkProvider } from '@clerk/nextjs';
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { dark } from '@clerk/themes';
 import { Toaster } from 'react-hot-toast';
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import './globals.css';
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          {children}
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              className: 'bg-gray-800 text-white border border-gray-700',
-              success: {
-                iconTheme: {
-                  primary: '#10B981',
-                  secondary: 'white',
+    <html lang="en" className="h-full bg-gray-900">
+      <body className="h-full">
+        <ClerkProvider
+          appearance={{
+            baseTheme: dark,
+            variables: {
+              colorPrimary: '#3b82f6',
+              colorBackground: '#111827',
+              colorInputBackground: '#1f2937',
+              colorText: '#f3f4f6',
+              colorTextSecondary: '#9ca3af',
+            },
+            elements: {
+              card: 'bg-gray-800 border border-gray-700',
+              navbar: 'bg-gray-800',
+              headerTitle: 'text-white',
+              headerSubtitle: 'text-gray-400',
+              socialButtonsBlockButton: 'bg-gray-700 hover:bg-gray-600',
+              socialButtonsBlockButtonText: 'text-white',
+              dividerLine: 'bg-gray-700',
+              dividerText: 'text-gray-400',
+              formButtonPrimary: 'bg-blue-600 hover:bg-blue-500',
+              formButtonReset: 'hover:bg-gray-700',
+              footerActionLink: 'text-blue-400 hover:text-blue-300',
+              identityPreviewText: 'text-white',
+              identityPreviewEditButton: 'text-blue-400 hover:text-blue-300',
+            },
+          }}
+        >
+          <div className="min-h-screen bg-gray-900">
+            {children}
+            <Toaster
+              position="bottom-right"
+              toastOptions={{
+                style: {
+                  background: '#1f2937',
+                  color: '#f3f4f6',
+                  borderRadius: '0.5rem',
                 },
-              },
-              error: {
-                iconTheme: {
-                  primary: '#EF4444',
-                  secondary: 'white',
+                success: {
+                  iconTheme: {
+                    primary: '#10b981',
+                    secondary: '#f3f4f6',
+                  },
                 },
-              },
-              style: {
-                background: '#1F2937',
-                color: '#F9FAFB',
-              },
-            }}
-          />
-        </body>
-      </html>
-    </ClerkProvider>
+                error: {
+                  iconTheme: {
+                    primary: '#ef4444',
+                    secondary: '#f3f4f6',
+                  },
+                },
+              }}
+            />
+          </div>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

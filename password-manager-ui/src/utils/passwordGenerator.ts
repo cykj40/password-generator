@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import CryptoJS from 'crypto-js';
 import zxcvbn from 'zxcvbn';
 
@@ -8,28 +7,6 @@ const charSets = {
     numbers: '0123456789',
     special: '!@#$%^&*()_-+={}[]|;:<>?/~'
 };
-
-async function collectEntropy() {
-    const timeStamp = Date.now().toString();
-    const performanceNow = performance.now().toString();
-    const screenData = `${window.screen.width}${window.screen.height}${window.screen.colorDepth}`;
-    const navigatorData = navigator.userAgent;
-
-    return timeStamp + performanceNow + screenData + navigatorData;
-}
-
-function ensureAllCharTypes(password: string): string {
-    const array = new Uint32Array(4);
-    crypto.getRandomValues(array);
-
-    return (
-        charSets.lower[array[0] % charSets.lower.length] +
-        charSets.upper[array[1] % charSets.upper.length] +
-        charSets.numbers[array[2] % charSets.numbers.length] +
-        charSets.special[array[3] % charSets.special.length] +
-        password.slice(4)
-    );
-}
 
 export interface GeneratedPassword {
     password: string;
@@ -71,17 +48,12 @@ export async function generateSecurePassword(options: Partial<PasswordOptions> =
 
     const allChars = Object.values(selectedCharSets).join('');
 
-    // Generate entropy and password
-    const entropy = await collectEntropy();
-    const seed = CryptoJS.SHA3(entropy).toString();
-    const nanoId = nanoid(finalOptions.length);
-
+    // Generate password
     const array = new Uint32Array(finalOptions.length);
     crypto.getRandomValues(array);
 
     let password = Array.from(array)
         .map((x, i) => {
-            const combined = seed[i % seed.length] + nanoId[i % nanoId.length];
             return allChars[x % allChars.length];
         })
         .join('');
@@ -92,7 +64,7 @@ export async function generateSecurePassword(options: Partial<PasswordOptions> =
         crypto.getRandomValues(ensureArray);
 
         let ensuredPassword = '';
-        Object.entries(selectedCharSets).forEach(([_, chars], index) => {
+        Object.entries(selectedCharSets).forEach(([, chars], index) => {
             ensuredPassword += chars[ensureArray[index] % chars.length];
         });
 
@@ -105,7 +77,7 @@ export async function generateSecurePassword(options: Partial<PasswordOptions> =
         password,
         strength: strength.score,
         entropy: strength.guesses_log10,
-        crackTime: strength.crack_times_display.offline_fast_hashing_1e10_per_second,
+        crackTime: strength.crack_times_display.offline_fast_hashing_1e10_per_second.toString(),
         hash: CryptoJS.SHA256(password).toString()
     };
 } 

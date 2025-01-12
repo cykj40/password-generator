@@ -22,7 +22,7 @@ export default function PasswordStrengthMeter({ password }: { password: string }
             setStrength({
                 score: result.score,
                 entropy: result.guesses_log10,
-                crackTime: result.crack_times_display.offline_fast_hashing_1e10_per_second,
+                crackTime: result.crack_times_display.offline_fast_hashing_1e10_per_second.toString(),
                 feedback: result.feedback
             });
         } else {
@@ -64,10 +64,10 @@ export default function PasswordStrengthMeter({ password }: { password: string }
                     <div
                         key={level}
                         className={`h-1 flex-1 rounded-full ${level <= strength.score
-                                ? level === strength.score
-                                    ? getStrengthColor(level).replace('text-', 'bg-')
-                                    : 'bg-gray-400'
-                                : 'bg-gray-700'
+                            ? level === strength.score
+                                ? getStrengthColor(level).replace('text-', 'bg-')
+                                : 'bg-gray-400'
+                            : 'bg-gray-700'
                             }`}
                     />
                 ))}

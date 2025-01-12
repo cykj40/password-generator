@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { EyeIcon, EyeSlashIcon, ClipboardDocumentIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
-import { PasswordStrengthMeter } from './PasswordStrengthMeter';
+import PasswordStrengthMeter from './PasswordStrengthMeter';
 import { isPasswordExpired } from '../utils/storage';
 
 interface PasswordHistoryEntry {
@@ -26,7 +26,7 @@ export default function PasswordHistory({
         try {
             await navigator.clipboard.writeText(password);
             toast.success('Password copied to clipboard');
-        } catch (err) {
+        } catch {
             toast.error('Failed to copy password');
         }
     };

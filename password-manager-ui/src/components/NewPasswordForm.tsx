@@ -6,10 +6,13 @@ import { EyeIcon, EyeSlashIcon, SparklesIcon, ClipboardDocumentIcon, ClipboardDo
 import toast from 'react-hot-toast';
 import PasswordStrengthMeter from './PasswordStrengthMeter';
 import { generateSecurePassword, PasswordOptions } from '@/utils/passwordGenerator';
-import { validatePassword, DEFAULT_REQUIREMENTS } from '@/utils/passwordValidation';
+import { PasswordRequirements, validatePassword } from '@/utils/passwordValidation';
 import PasswordHistory from './PasswordHistory';
 import { savePasswordHistory, loadPasswordHistory, saveRequirements, loadRequirements, calculateExpirationDate, loadExpirationDays, saveExpirationDays } from '@/utils/storage';
 import ExpirationConfig from './ExpirationConfig';
+import PasswordRequirementsConfig from './PasswordRequirementsConfig';
+import './NewPasswordForm.css';  // Local CSS file
+
 
 interface PasswordHistoryEntry {
     password: string;
@@ -35,9 +38,19 @@ export default function NewPasswordForm() {
         password: '',
         url: '',
     });
+    const DEFAULT_EXPIRATION_DAYS = 90;
+
     const [passwordHistory, setPasswordHistory] = useState<PasswordHistoryEntry[]>([]);
     const [validationErrors, setValidationErrors] = useState<string[]>([]);
     const [expirationDays, setExpirationDays] = useState(DEFAULT_EXPIRATION_DAYS);
+    const [requirements, setRequirements] = useState<PasswordRequirements>({
+        minLength: 8,
+        minStrength: 2,
+        requireLowercase: true,
+        requireUppercase: true,
+        requireNumbers: true,
+        requireSpecial: true
+    });
 
     // Load history on mount
     useEffect(() => {
@@ -45,7 +58,8 @@ export default function NewPasswordForm() {
         setPasswordHistory(
             storedHistory.map(entry => ({
                 ...entry,
-                timestamp: new Date(entry.timestamp)
+                timestamp: new Date(entry.timestamp),
+                expiresAt: new Date(entry.expiresAt)
             }))
         );
     }, []);
