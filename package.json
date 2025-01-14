@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cd password-manager-ui && npm run dev",
-    "build": "cd password-manager-ui && npm install && npm run build",
-    "start": "cd password-manager-ui && npm start",
-    "install:ui": "cd password-manager-ui && npm install"
+    "build": "cd password-manager-ui && npm run build",
+    "start": "cd password-manager-ui && npm start"
   }
 }
