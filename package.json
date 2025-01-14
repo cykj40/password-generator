@@ -1,11 +1,11 @@
 {
-  "name": "password-manager",
+  "name": "password-generator",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "start cmd /c \"cd password-manager-api && npm run dev\" && start cmd /c \"cd password-manager-ui && npm run dev\"",
-    "dev:api": "cd password-manager-api && npm run dev",
-    "dev:ui": "cd password-manager-ui && npm run dev",
-    "install:all": "cd password-manager-api && npm install && cd ../password-manager-ui && npm install"
+    "dev": "cd password-manager-ui && npm run dev",
+    "build": "cd password-manager-ui && npm run build",
+    "start": "cd password-manager-ui && npm start",
+    "install:ui": "cd password-manager-ui && npm install"
   }
 }
