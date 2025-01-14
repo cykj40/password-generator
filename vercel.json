@@ -1,0 +1,6 @@
+{
+  "buildCommand": "cd password-manager-ui && npm install && npm run build",
+  "outputDirectory": "password-manager-ui/.next",
+  "installCommand": "cd password-manager-ui && npm install",
+  "framework": "nextjs"
+} 
