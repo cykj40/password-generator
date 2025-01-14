@@ -107,16 +107,31 @@ export default function PasswordGenerator() {
 
             {/* Password Strength Indicator */}
             {password && (
-              <div className="mt-4">
-                <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full ${getPasswordStrength().color} transition-all duration-300`}
-                    style={{ width: `${(getPasswordStrength().score + 1) * 20}%` }}
-                  />
+              <div className="mt-4 space-y-2">
+                <div className="flex gap-1">
+                  {[0, 1, 2, 3, 4].map((level) => (
+                    <div
+                      key={level}
+                      className={`h-2 flex-1 rounded-full transition-all duration-300 ${level <= getPasswordStrength().score
+                        ? getPasswordStrength().color
+                        : 'bg-gray-700'
+                        }`}
+                    />
+                  ))}
                 </div>
-                <p className="text-sm text-gray-400 mt-2">
-                  Password Strength: {['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'][getPasswordStrength().score]}
-                </p>
+                <div className="flex items-center justify-between">
+                  <p className={`text-sm font-medium ${getPasswordStrength().color.replace('bg-', 'text-')}`}>
+                    {['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'][getPasswordStrength().score]}
+                  </p>
+                  <p className="text-sm text-gray-400">
+                    {password.length} characters
+                  </p>
+                </div>
+                {getPasswordStrength().score < 3 && (
+                  <p className="text-sm text-yellow-500">
+                    Tip: Use a mix of uppercase, lowercase, numbers, and symbols for a stronger password
+                  </p>
+                )}
               </div>
             )}
           </div>
