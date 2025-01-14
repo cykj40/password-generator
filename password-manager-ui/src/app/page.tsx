@@ -79,14 +79,21 @@ export default function PasswordGenerator() {
           {/* Password Display */}
           <div className="bg-gray-900 p-4 rounded-lg mb-6">
             <div className="flex justify-between items-center">
-              <span className="font-mono text-xl">{password || 'Click generate to create password'}</span>
+              <input
+                type="text"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Type or generate a password"
+                className="font-mono text-xl bg-transparent flex-1 outline-none focus:ring-2 focus:ring-blue-500 rounded px-2"
+              />
               <div className="flex gap-2">
                 <button
                   onClick={copyToClipboard}
                   className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
                   title="Copy to clipboard"
+                  disabled={!password}
                 >
-                  <ClipboardDocumentIcon className="w-5 h-5" />
+                  <ClipboardDocumentIcon className="w-5 h-5" opacity={password ? 1 : 0.5} />
                 </button>
                 <button
                   onClick={generatePassword}
