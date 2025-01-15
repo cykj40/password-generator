@@ -10,28 +10,73 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-    to bottom,
-    rgb(var(--background-start-rgb)),
-    rgb(var(--background-end-rgb))
-  );
+  background: rgb(var(--background-start-rgb));
   min-height: 100vh;
 }
 
-@layer components {
-  .btn {
-    @apply px-4 py-2 rounded-lg transition-colors duration-200;
-  }
-  
-  .btn-primary {
-    @apply bg-blue-600 hover:bg-blue-700 text-white;
-  }
+/* Range Input Styling */
+input[type="range"] {
+  @apply w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer;
+}
 
-  .input-field {
-    @apply w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent;
-  }
+input[type="range"]::-webkit-slider-thumb {
+  @apply w-4 h-4 bg-blue-500 rounded-full appearance-none hover:bg-blue-600 transition-colors;
+  -webkit-appearance: none;
+}
 
-  .card {
-    @apply bg-gray-800 rounded-lg p-6 shadow-lg;
-  }
+input[type="range"]::-moz-range-thumb {
+  @apply w-4 h-4 bg-blue-500 rounded-full border-0 hover:bg-blue-600 transition-colors;
+}
+
+/* Checkbox Styling */
+input[type="checkbox"] {
+  @apply h-4 w-4 rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-gray-900;
+}
+
+/* Password Strength Colors */
+.strength-very-weak { @apply bg-red-500; }
+.strength-weak { @apply bg-orange-500; }
+.strength-fair { @apply bg-yellow-500; }
+.strength-strong { @apply bg-blue-500; }
+.strength-very-secure { @apply bg-green-500; }
+
+/* Button styling */
+.btn {
+  @apply p-2 text-white hover:bg-gray-700 rounded-lg transition-colors;
+}
+
+.btn:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* Container styling */
+.container {
+  @apply max-w-4xl mx-auto px-4;
+}
+
+/* Card styling */
+.card {
+  @apply bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 shadow-xl border border-gray-700;
+}
+
+/* Input styling */
+.password-input {
+  @apply flex-1 font-mono text-xl bg-transparent text-white outline-none focus:ring-2 focus:ring-blue-500 rounded px-2;
+}
+
+/* Strength meter styling */
+.strength-meter {
+  @apply h-2 w-full bg-gray-700 rounded-full overflow-hidden;
+}
+
+.strength-meter-bar {
+  @apply h-full transition-all duration-300;
+}
+
+.strength-label {
+  @apply text-sm font-medium;
+}
+
+.char-count {
+  @apply text-sm text-gray-400;
 }
