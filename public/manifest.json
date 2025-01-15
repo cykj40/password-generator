@@ -1,7 +1,7 @@
 {
-  "name": "Password Manager",
-  "short_name": "PassManager",
-  "description": "Secure Password Manager",
+  "name": "Password Generator",
+  "short_name": "PassGen",
+  "description": "A secure password generator with strength meter",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#111827",
